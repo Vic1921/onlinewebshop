@@ -1,4 +1,4 @@
-package at.dke.onlinewebshop.sql;
+package at.dke.onlinewebshop.sql.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -32,5 +33,10 @@ public class Customer {
     @Column(name = "password", nullable = false)
     private String  password;
 
+    @OneToOne
+    @JoinColumn(name = "vendor_name")
+    private Vendor vendor;
 
+    @OneToMany(mappedBy = "customer")
+    private List<Article> articles;
 }

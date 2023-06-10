@@ -1,5 +1,6 @@
-package at.dke.onlinewebshop.sql;
+package at.dke.onlinewebshop.sql.entities;
 
+import at.dke.onlinewebshop.sql.entities.Customer;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
