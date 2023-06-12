@@ -17,6 +17,7 @@ public class Article {
 
     @Id
     @Column(name = "article_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "article_name", nullable = false)
@@ -26,6 +27,10 @@ public class Article {
     private double price;
 
     @ManyToOne
-    @JoinColumn(name = "customer_email")
+    @JoinColumn(name = "customer_id")
     private Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 }

@@ -39,4 +39,7 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer")
     private List<Article> articles;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Order> orders;
 }

@@ -1,10 +1,15 @@
 package at.dke.onlinewebshop.sql.entities;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -23,4 +28,16 @@ public class Vendor {
 
     @OneToOne(mappedBy = "vendor")
     private Customer customer;
+
+    @OneToMany(mappedBy = "vendor")
+    private List<Order> orders;
+
+    @ManyToMany
+    @JoinTable(
+            name = "vendor_relationship",
+            joinColumns = @JoinColumn(name = "vendor_id"),
+            inverseJoinColumns = @JoinColumn(name = "related_vendor_id")
+    )
+    private List<Vendor> relatedVendors;
+
 }
