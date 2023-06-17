@@ -21,5 +21,8 @@ public class CorporateCustomer extends Customer {
     @Column(name = "tax_number", nullable = false)
     private String taxNumber;
 
-
+    public CorporateCustomer(String email, String lastname, String surname, String address, String password, String taxNumber) {
+        super(email, lastname, surname, address, password);
+        this.taxNumber = taxNumber;
+    }
 }

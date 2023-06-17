@@ -42,4 +42,12 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer")
     private List<Order> orders;
+
+    public Customer(String email, String lastname, String surname, String address, String password) {
+        this.email = email;
+        this.lastname = lastname;
+        this.surname = surname;
+        this.address = address;
+        this.password = password;
+    }
 }
