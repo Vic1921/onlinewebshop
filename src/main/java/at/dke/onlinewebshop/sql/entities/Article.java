@@ -33,4 +33,9 @@ public class Article {
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
+
+    public Article(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
 }

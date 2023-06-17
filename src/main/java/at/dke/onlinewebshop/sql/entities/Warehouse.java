@@ -36,4 +36,9 @@ public class Warehouse {
 
     @OneToMany(mappedBy = "warehouse", cascade = CascadeType.ALL)
     private List<Department> departments;
+
+    public Warehouse(String location, String name) {
+        this.location = location;
+        this.name = name;
+    }
 }

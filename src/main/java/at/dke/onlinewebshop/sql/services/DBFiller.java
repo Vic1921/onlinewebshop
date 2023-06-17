@@ -1,9 +1,6 @@
 package at.dke.onlinewebshop.sql.services;
 
-import at.dke.onlinewebshop.sql.entities.Article;
-import at.dke.onlinewebshop.sql.entities.CorporateCustomer;
-import at.dke.onlinewebshop.sql.entities.Customer;
-import at.dke.onlinewebshop.sql.entities.PrivateCustomer;
+import at.dke.onlinewebshop.sql.entities.*;
 import at.dke.onlinewebshop.sql.repositories.*;
 import com.github.javafaker.Faker;
 import org.springframework.stereotype.Service;
@@ -14,6 +11,7 @@ import java.util.List;
 public class DBFiller {
     private static final int USER_LIMIT = 100;
     private static final int ARTICLE_LIMIT = 1000;
+    private static final int WAREHOUSE_LIMIT = 5;
 
 
     private final CustomerRepository customerRepository;
@@ -41,6 +39,12 @@ public class DBFiller {
         this.warehouseRepository = warehouseRepository;
     }
 
+    public void fillDB() {
+        insertCustomers();
+        insertArticle();
+        insertEmployees();
+        insertWarehouse();
+    }
 
     private void insertCustomers() {
         var domains = new String[]{
@@ -86,25 +90,60 @@ public class DBFiller {
         customerRepository.saveAll(List.of(users));
     }
 
+    private void insertArticle() {
+        var articles = new Article[ARTICLE_LIMIT];
 
-
-    /*private void insertArticle() {
-        var articles = new Article[USER_LIMIT];
-
-        for (int i = 0; i < USER_LIMIT; i++) {
+        for (int i = 0; i < ARTICLE_LIMIT; i++) {
             var name = Faker.instance().commerce().productName();
-            var price = Faker.instance().commerce().price();
-            var description = Faker.instance().lorem().sentence();
-            var stock = Faker.instance().random().nextInt(0, 1000);
+            var price = Faker.instance().commerce().price(1, 10000).length();
 
             articles[i] = new Article(
                     name,
-                    price,
-                    description,
-                    stock
+                    price
             );
         }
 
         articleRepository.saveAll(List.of(articles));
-    }*/
+    }
+
+    private void insertEmployees() {
+
+        var employees = new Employee[USER_LIMIT];
+
+        for (int i = 0; i < USER_LIMIT; i++) {
+            var n = Faker.instance().name();
+            var firstName = n.firstName();
+            var lastName = n.lastName();
+            var address = Faker.instance().address();
+            var location = address.fullAddress();
+
+            employees[i] = new Employee(
+                    location,
+                    firstName + " " + lastName
+            );
+        }
+
+        employeeRepository.saveAll(List.of(employees));
+    }
+
+    private void insertWarehouse() {
+        var warehouses = new Warehouse[WAREHOUSE_LIMIT];
+
+        for (int i = 0; i < WAREHOUSE_LIMIT; i++) {
+            var n = Faker.instance().name();
+            var firstName = n.firstName();
+            var lastName = n.lastName();
+            var address = Faker.instance().address();
+            var location = address.fullAddress();
+
+            warehouses[i] = new Warehouse(
+                    location,
+                    firstName + " " + lastName
+            );
+        }
+
+        warehouseRepository.saveAll(List.of(warehouses));
+    }
+
+
 }

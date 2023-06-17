@@ -30,4 +30,9 @@ public class Employee {
 
     @ManyToMany(mappedBy = "employees")
     private List<Warehouse> warehouses;
+
+    public Employee(String location, String name) {
+        this.location = location;
+        this.name = name;
+    }
 }
