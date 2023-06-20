@@ -15,6 +15,10 @@ import java.util.List;
 public class Customer {
 
     @Id
+    @Column(name = "customer_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int customerId;
+
     @Column(name = "email", nullable = false)
     private String email;
 

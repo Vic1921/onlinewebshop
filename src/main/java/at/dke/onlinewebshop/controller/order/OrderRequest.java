@@ -11,6 +11,9 @@ import java.util.List;
 @NoArgsConstructor
 public class OrderRequest {
     private int customerId;
+    private String creditCardNr;
+    private String creditCardName;
+    private String orderDate;
     private List<Integer> articleIds;
     // getters and setters
 }

@@ -22,7 +22,7 @@ public class Order {
     private int orderId;
 
     @Column(name = "total_amount", nullable = false)
-    private String totalAmount;
+    private double totalAmount;
 
     @Column(name = "order_date", nullable = false)
     private String orderDate;

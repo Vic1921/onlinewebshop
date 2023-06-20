@@ -1,15 +1,19 @@
-/*
 package at.dke.onlinewebshop.sql.services;
-import at.dke.onlinewebshop.sql.entities.Article;
-import at.dke.onlinewebshop.sql.entities.Customer;
-import at.dke.onlinewebshop.sql.entities.Order;
+import at.dke.onlinewebshop.sql.entities.*;
 import at.dke.onlinewebshop.sql.repositories.ArticleRepository;
 import at.dke.onlinewebshop.sql.repositories.CustomerRepository;
 import at.dke.onlinewebshop.sql.repositories.OrderRepository;
+import at.dke.onlinewebshop.sql.repositories.PaymentRepository;
+import at.dke.onlinewebshop.sql.services.exceptions.InvalidPaymentInfoException;
+import at.dke.onlinewebshop.sql.services.exceptions.MissingCustomerIdException;
+import at.dke.onlinewebshop.sql.services.exceptions.MissingProductException;
+import com.github.javafaker.Faker;
+import lombok.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Map;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class OrderService {
@@ -17,48 +21,76 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final ArticleRepository articleRepository;
     private final CustomerRepository customerRepository;
+    private final PaymentRepository paymentRepository;
 
-    public OrderService(OrderRepository orderRepository, ArticleRepository articleRepository, CustomerRepository customerRepository) {
+    public OrderService(OrderRepository orderRepository, ArticleRepository articleRepository, CustomerRepository customerRepository, PaymentRepository paymentRepository) {
         this.orderRepository = orderRepository;
         this.articleRepository = articleRepository;
         this.customerRepository = customerRepository;
+        this.paymentRepository = paymentRepository;
     }
 
     @Transactional
-    public Order placeOrder(Long customerId, Map<Long, Integer> articles) {
-        // Check if the customer exists
-        Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new RuntimeException("Customer not found"));
+    public void saveOrder(int customerId, @NonNull String creditCardNr, @NonNull String creditCardName,
+                          @NonNull String orderDate, double sum, @NonNull List<Article> articleList)
+            throws MissingProductException, InvalidPaymentInfoException, MissingCustomerIdException {
 
-        // Create a new order for the customer
-        Order order = new Order();
-        order.setCustomer(customer);
+        var customerOpt = customerRepository.findById(customerId).get();
+        var faker = Faker.instance();
+        checkCredentials(creditCardNr, creditCardName, orderDate, sum, articleList, customerOpt);
 
-        // For each article in the order, check if it exists and if there is enough stock
-        for (Map.Entry<Long, Integer> entry : articles.entrySet()) {
-            Article article = articleRepository.findById(entry.getKey()).orElseThrow(() -> new RuntimeException("Article not found"));
-            int quantity = entry.getValue();
+        // creating the order
+        var newOrder = new Order(0, sum, orderDate, false, customerOpt, articleList, null, null, null);
 
-            // Check if there is enough stock
-            if (article.getStock() < quantity) {
-                throw new RuntimeException("Not enough stock for article " + article.getId());
-            }
+        // create and validate PaymentInfoObject
+        Payment paymentInfo = new Payment(0, sum, orderDate, new Date(System.currentTimeMillis()).toString(), newOrder);
+        paymentRepository.save(paymentInfo);
 
-            // Create a new order line for the article
-            OrderLine orderLine = new OrderLine();
-            orderLine.setArticle(article);
-            orderLine.setQuantity(quantity);
-            orderLine.setOrder(order);
+        // setting PaymentInfo in order
+        newOrder.setPayment(paymentInfo);
 
-            // Add the order line to the order
-            order.getOrderLines().add(orderLine);
-
-            // Update the stock of the article
-            article.setStock(article.getStock() - quantity);
-            articleRepository.save(article);
+        // setting orderProducts in the order class
+        List<Article> orderProducts = newOrder.getArticles();
+        for (var prod : articleList) {
+            var article = articleRepository.findById(prod.getId()).get();
+            orderProducts.add(article);
         }
 
-        // Save the order
-        return orderRepository.save(order);
+        // saving the order in database
+        newOrder.setArticles(orderProducts);
+
+        // save the order
+        orderRepository.save(newOrder);
+
+    }
+
+    private void checkCredentials(String creditCardNr, String creditCardName,
+                                  String orderDate, double sum, List<Article> articleList, Customer customerOpt)
+            throws MissingProductException, InvalidPaymentInfoException, MissingCustomerIdException {
+
+        if (creditCardNr == null) {
+            throw new InvalidPaymentInfoException("credit card nr is null");
+        }
+
+        if (creditCardName == null) {
+            throw new InvalidPaymentInfoException("credit card name is null");
+        }
+
+        if (orderDate == null) {
+            throw new InvalidPaymentInfoException("expiration date is null");
+        }
+
+        if (sum == 0) {
+            throw new MissingProductException("Total amount of ordered product prices is null");
+        }
+
+        if (articleList == null) {
+            throw new MissingProductException("Missing products");
+        }
+
+        if (customerOpt == null) {
+            throw new MissingCustomerIdException(String.format("user is not found"));
+        }
+
     }
 }
-*/

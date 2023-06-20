@@ -20,7 +20,7 @@ public class Payment {
     private int paymentId;
 
     @Column(name = "price", nullable = false)
-    private int price;
+    private double price;
 
     @Column(name = "payment_date", nullable = false)
     private String paymentDate;
