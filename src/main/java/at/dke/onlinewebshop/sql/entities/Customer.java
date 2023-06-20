@@ -10,8 +10,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "users")
-@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "customers")
+//@Inheritance(strategy = InheritanceType.JOINED)
 public class Customer {
 
     @Id

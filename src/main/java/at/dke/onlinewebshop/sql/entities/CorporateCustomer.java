@@ -1,3 +1,4 @@
+/*
 package at.dke.onlinewebshop.sql.entities;
 
 import at.dke.onlinewebshop.sql.entities.Customer;
@@ -26,3 +27,4 @@ public class CorporateCustomer extends Customer {
         this.taxNumber = taxNumber;
     }
 }
+*/

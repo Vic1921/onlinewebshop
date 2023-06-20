@@ -1,3 +1,4 @@
+/*
 package at.dke.onlinewebshop.sql.entities;
 
 
@@ -15,3 +16,4 @@ public class PrivateCustomer extends Customer {
     }
 
 }
+*/

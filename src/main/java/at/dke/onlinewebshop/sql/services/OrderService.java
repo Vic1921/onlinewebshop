@@ -1,3 +1,4 @@
+/*
 package at.dke.onlinewebshop.sql.services;
 import at.dke.onlinewebshop.sql.entities.Article;
 import at.dke.onlinewebshop.sql.entities.Customer;
@@ -60,3 +61,4 @@ public class OrderService {
         return orderRepository.save(order);
     }
 }
+*/

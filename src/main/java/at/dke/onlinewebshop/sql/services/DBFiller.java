@@ -17,8 +17,8 @@ public class DBFiller {
     private final CustomerRepository customerRepository;
     private final OrderRepository orderRepository;
     private final ArticleRepository articleRepository;
-    private final CorporateCustomerRepository corporateCustomerRepository;
-    private final PrivateCustomerRepository privateCustomerRepository;
+    //private final CorporateCustomerRepository corporateCustomerRepository;
+    //private final PrivateCustomerRepository privateCustomerRepository;
     private final DepartmentRepository departmentRepository;
     private final EmployeeRepository employeeRepository;
     private final PaymentRepository paymentRepository;
@@ -26,12 +26,12 @@ public class DBFiller {
     private final WarehouseRepository warehouseRepository;
 
 
-    public DBFiller(CustomerRepository customerRepository, OrderRepository orderRepository, ArticleRepository articleRepository, CorporateCustomerRepository corporateCustomerRepository, PrivateCustomerRepository privateCustomerRepository, DepartmentRepository departmentRepository, EmployeeRepository employeeRepository, PaymentRepository paymentRepository, VendorRepository vendorRepository, WarehouseRepository warehouseRepository) {
+    public DBFiller(CustomerRepository customerRepository, OrderRepository orderRepository, ArticleRepository articleRepository, /*CorporateCustomerRepository corporateCustomerRepository, PrivateCustomerRepository privateCustomerRepository,*/ DepartmentRepository departmentRepository, EmployeeRepository employeeRepository, PaymentRepository paymentRepository, VendorRepository vendorRepository, WarehouseRepository warehouseRepository) {
         this.customerRepository = customerRepository;
         this.orderRepository = orderRepository;
         this.articleRepository = articleRepository;
-        this.corporateCustomerRepository = corporateCustomerRepository;
-        this.privateCustomerRepository = privateCustomerRepository;
+        //this.corporateCustomerRepository = corporateCustomerRepository;
+        //this.privateCustomerRepository = privateCustomerRepository;
         this.departmentRepository = departmentRepository;
         this.employeeRepository = employeeRepository;
         this.paymentRepository = paymentRepository;
@@ -63,7 +63,7 @@ public class DBFiller {
             var password = Faker.instance().random().hex();
             var email = firstName + "." + lastName + "@" + domains[i % domains.length];
 
-            if (i < USER_LIMIT / 2) {
+            /*if (i < USER_LIMIT / 2) {
                 var age = Faker.instance().random().nextInt(20, 55);
                 var phone = Faker.instance().phoneNumber();
 
@@ -84,8 +84,15 @@ public class DBFiller {
                         password,
                         taxNumber
                 );
-            }
+            }*/
+            users[i] = new Customer(
+                    email,
+                    lastName,
+                    firstName,
+                    address.fullAddress(),
+                    password);
         }
+
 
         customerRepository.saveAll(List.of(users));
     }
