@@ -27,6 +27,9 @@ public class Order {
     @Column(name = "order_date", nullable = false)
     private String orderDate;
 
+    @Column(name = "fulfilled", nullable = false)
+    private boolean fulfilled;
+
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;

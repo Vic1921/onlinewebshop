@@ -26,6 +26,9 @@ public class Article {
     @Column(name = "article_price", nullable = false)
     private double price;
 
+    @Column(name = "article_quantity", nullable = false)
+    private int quantity;
+
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
