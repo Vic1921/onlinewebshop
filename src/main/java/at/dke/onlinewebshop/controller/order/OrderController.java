@@ -8,6 +8,7 @@ import at.dke.onlinewebshop.sql.services.OrderService;
 import at.dke.onlinewebshop.sql.services.exceptions.InvalidPaymentInfoException;
 import at.dke.onlinewebshop.sql.services.exceptions.MissingCustomerIdException;
 import at.dke.onlinewebshop.sql.services.exceptions.MissingProductException;
+import at.dke.onlinewebshop.sql.services.exceptions.StockException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,7 +46,7 @@ public class OrderController {
     }
 
     @PostMapping("/{orderId}/fulfill")
-    public Order fulfillOrder(@PathVariable int orderId) {
+    public Order fulfillOrder(@PathVariable int orderId) throws StockException {
         return orderFulfillmentService.fulfillOrder(orderId);
     }
 }

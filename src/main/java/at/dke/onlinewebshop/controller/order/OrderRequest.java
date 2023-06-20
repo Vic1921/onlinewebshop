@@ -15,5 +15,4 @@ public class OrderRequest {
     private String creditCardName;
     private String orderDate;
     private List<Integer> articleIds;
-    // getters and setters
 }
