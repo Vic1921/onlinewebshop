@@ -1,6 +1,10 @@
 package at.dke.onlinewebshop.sql.services;
 
-import at.dke.onlinewebshop.sql.entities.*;
+import at.dke.onlinewebshop.entities.Article;
+import at.dke.onlinewebshop.entities.Customer;
+import at.dke.onlinewebshop.entities.Employee;
+import at.dke.onlinewebshop.entities.Warehouse;
+import at.dke.onlinewebshop.entities.*;
 import at.dke.onlinewebshop.sql.repositories.*;
 import com.github.javafaker.Faker;
 import org.springframework.stereotype.Service;

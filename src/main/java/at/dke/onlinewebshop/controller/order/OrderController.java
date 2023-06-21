@@ -1,7 +1,7 @@
 package at.dke.onlinewebshop.controller.order;
 
-import at.dke.onlinewebshop.sql.entities.Article;
-import at.dke.onlinewebshop.sql.entities.Order;
+import at.dke.onlinewebshop.entities.Article;
+import at.dke.onlinewebshop.entities.Order;
 import at.dke.onlinewebshop.sql.repositories.ArticleRepository;
 import at.dke.onlinewebshop.sql.services.OrderFulfillmentService;
 import at.dke.onlinewebshop.sql.services.OrderService;

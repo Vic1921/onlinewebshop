@@ -1,6 +1,6 @@
 package at.dke.onlinewebshop.sql.repositories;
 
-import at.dke.onlinewebshop.sql.entities.Payment;
+import at.dke.onlinewebshop.entities.Payment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

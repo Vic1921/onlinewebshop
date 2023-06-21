@@ -1,6 +1,6 @@
 package at.dke.onlinewebshop.sql.services;
 
-import at.dke.onlinewebshop.sql.entities.Article;
+import at.dke.onlinewebshop.entities.Article;
 import at.dke.onlinewebshop.sql.repositories.ArticleRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

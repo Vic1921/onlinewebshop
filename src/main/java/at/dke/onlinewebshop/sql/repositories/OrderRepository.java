@@ -1,7 +1,7 @@
 package at.dke.onlinewebshop.sql.repositories;
 
 
-import at.dke.onlinewebshop.sql.entities.Order;
+import at.dke.onlinewebshop.entities.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

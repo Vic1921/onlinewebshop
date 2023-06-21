@@ -1,11 +1,11 @@
-package at.dke.onlinewebshop.sql.entities;
+package at.dke.onlinewebshop.entities;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.util.List;
 
 @Getter

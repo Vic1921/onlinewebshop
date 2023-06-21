@@ -1,8 +1,8 @@
 package at.dke.onlinewebshop.sql.services;
 
-import at.dke.onlinewebshop.sql.entities.Employee;
-import at.dke.onlinewebshop.sql.entities.Order;
-import at.dke.onlinewebshop.sql.entities.Vendor;
+import at.dke.onlinewebshop.entities.Employee;
+import at.dke.onlinewebshop.entities.Order;
+import at.dke.onlinewebshop.entities.Vendor;
 import at.dke.onlinewebshop.sql.repositories.EmployeeRepository;
 import at.dke.onlinewebshop.sql.repositories.OrderRepository;
 import at.dke.onlinewebshop.sql.repositories.VendorRepository;
