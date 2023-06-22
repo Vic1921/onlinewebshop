@@ -1,4 +1,4 @@
-package at.dke.onlinewebshop.controller.order;
+package at.dke.onlinewebshop.controller.order.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -4,18 +4,17 @@ import at.dke.onlinewebshop.entities.Customer;
 import at.dke.onlinewebshop.entities.Order;
 import at.dke.onlinewebshop.entities.Payment;
 import at.dke.onlinewebshop.entities.*;
-import at.dke.onlinewebshop.sql.repositories.ArticleRepository;
-import at.dke.onlinewebshop.sql.repositories.CustomerRepository;
-import at.dke.onlinewebshop.sql.repositories.OrderRepository;
-import at.dke.onlinewebshop.sql.repositories.PaymentRepository;
+import at.dke.onlinewebshop.sql.repositories.*;
 import at.dke.onlinewebshop.sql.services.exceptions.InvalidPaymentInfoException;
 import at.dke.onlinewebshop.sql.services.exceptions.MissingCustomerIdException;
 import at.dke.onlinewebshop.sql.services.exceptions.MissingProductException;
 import com.github.javafaker.Faker;
 import lombok.NonNull;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.awt.print.Pageable;
 import java.util.Date;
 import java.util.List;
 
@@ -97,4 +96,9 @@ public class OrderService {
         }
 
     }
+
+    public List<CountryOrderCount> getOrdersByCustomerId(int articleId) {
+        return orderRepository.findTopCountriesByArticle(articleId,(Pageable) PageRequest.of(0, 5));
+    }
+
 }

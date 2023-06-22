@@ -1,5 +1,6 @@
 package at.dke.onlinewebshop.controller.order;
 
+import at.dke.onlinewebshop.controller.order.request.OrderRequest;
 import at.dke.onlinewebshop.entities.Article;
 import at.dke.onlinewebshop.entities.Order;
 import at.dke.onlinewebshop.sql.repositories.ArticleRepository;
@@ -11,6 +12,7 @@ import at.dke.onlinewebshop.sql.services.exceptions.MissingProductException;
 import at.dke.onlinewebshop.sql.services.exceptions.StockException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -49,5 +51,15 @@ public class OrderController {
     public Order fulfillOrder(@PathVariable int orderId) throws StockException {
         return orderFulfillmentService.fulfillOrder(orderId);
     }
+
+    @GetMapping("/report/{articleId}")
+    public OrderReportResponse report(@PathVariable int articleId) {
+        OrderReportResponse response = new OrderReportResponse();
+        List<Order> toConvert = response.getRows();
+        toConvert.addAll((Collection<? extends Order>) orderService.getOrdersByCustomerId(articleId));
+        response.setRows(toConvert);
+        return response;
+    }
+
 }
 
