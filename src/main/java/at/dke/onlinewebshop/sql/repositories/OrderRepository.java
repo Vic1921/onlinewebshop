@@ -13,11 +13,13 @@ import java.util.List;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 
-    @Query("SELECT o.customer AS country, COUNT(o) AS orderCount " +
+/*    @Query("SELECT o.customer AS country, COUNT(o) AS orderCount " +
             "FROM Order o " +
             "WHERE o.article.id = :articleId " +
             "GROUP BY o.customer.country " +
             "ORDER BY orderCount DESC")
     List<CountryOrderCount> findTopCountriesByArticle(@Param("articleId") int articleId, Pageable pageable);
+*/
 }
+
 

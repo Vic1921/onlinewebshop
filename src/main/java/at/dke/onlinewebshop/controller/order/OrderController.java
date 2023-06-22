@@ -4,6 +4,7 @@ import at.dke.onlinewebshop.controller.order.request.OrderRequest;
 import at.dke.onlinewebshop.entities.Article;
 import at.dke.onlinewebshop.entities.Order;
 import at.dke.onlinewebshop.sql.repositories.ArticleRepository;
+import at.dke.onlinewebshop.sql.repositories.CountryOrderCount;
 import at.dke.onlinewebshop.sql.services.OrderFulfillmentService;
 import at.dke.onlinewebshop.sql.services.OrderService;
 import at.dke.onlinewebshop.sql.services.exceptions.InvalidPaymentInfoException;
@@ -53,12 +54,8 @@ public class OrderController {
     }
 
     @GetMapping("/report/{articleId}")
-    public OrderReportResponse report(@PathVariable int articleId) {
-        OrderReportResponse response = new OrderReportResponse();
-        List<Order> toConvert = response.getRows();
-        toConvert.addAll((Collection<? extends Order>) orderService.getOrdersByCustomerId(articleId));
-        response.setRows(toConvert);
-        return response;
+    public List<CountryOrderCount> report(@PathVariable int articleId) {
+        return orderService.getOrdersByCustomerId(articleId);
     }
 
 }

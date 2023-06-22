@@ -1,12 +1,11 @@
-/*
-package at.dke.onlinewebshop.sql.entities;
+package at.dke.onlinewebshop.entities;
 
 
-import lombok.AllArgsConstructor;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
+@NoArgsConstructor
 @Entity
 @Table(name = "private_customers")
 public class PrivateCustomer extends Customer {
@@ -16,4 +15,3 @@ public class PrivateCustomer extends Customer {
     }
 
 }
-*/

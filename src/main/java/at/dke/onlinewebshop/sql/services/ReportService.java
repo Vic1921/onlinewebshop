@@ -18,7 +18,8 @@ public class ReportService {
     }
 
     public List<CountryOrderCount> generateReport(int articleId) {
-        return orderRepository.findTopCountriesByArticle(articleId, (Pageable) PageRequest.of(0, 5));
+       // return orderRepository.findTopCountriesByArticle(articleId, (Pageable) PageRequest.of(0, 5));
+        return null;
     }
 }
 

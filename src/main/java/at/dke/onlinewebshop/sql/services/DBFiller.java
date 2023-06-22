@@ -67,7 +67,7 @@ public class DBFiller {
             var password = Faker.instance().random().hex();
             var email = firstName + "." + lastName + "@" + domains[i % domains.length];
 
-            /*if (i < USER_LIMIT / 2) {
+            if (i < USER_LIMIT / 2) {
                 var age = Faker.instance().random().nextInt(20, 55);
                 var phone = Faker.instance().phoneNumber();
 
@@ -88,13 +88,7 @@ public class DBFiller {
                         password,
                         taxNumber
                 );
-            }*/
-            users[i] = new Customer(
-                    email,
-                    lastName,
-                    firstName,
-                    address.fullAddress(),
-                    password);
+            }
         }
 
 

@@ -98,7 +98,8 @@ public class OrderService {
     }
 
     public List<CountryOrderCount> getOrdersByCustomerId(int articleId) {
-        return orderRepository.findTopCountriesByArticle(articleId,(Pageable) PageRequest.of(0, 5));
+        //return orderRepository.findTopCountriesByArticle(articleId,(Pageable) PageRequest.of(0, 5));
+        return null;
     }
 
 }
